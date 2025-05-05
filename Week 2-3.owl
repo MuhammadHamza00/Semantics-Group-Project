@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+]>
+<rdf:RDF xmlns="http://www.example.org/fyp-process#"
+     xml:base="http://www.example.org/fyp-process"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+    <owl:Ontology rdf:about="http://www.example.org/fyp-process"/>
+
+    <!-- Classes -->
+    <owl:Class rdf:about="#Student"/>
+    <owl:Class rdf:about="#Group"/>
+    <owl:Class rdf:about="#Project"/>
+    <owl:Class rdf:about="#Supervisor"/>
+    <owl:Class rdf:about="#FYP_Coordinator"/>
+    <owl:Class rdf:about="#Supervisory_Committee"/>
+    <owl:Class rdf:about="#Progress_Report"/>
+    <owl:Class rdf:about="#Evaluation"/>
+    <owl:Class rdf:about="#Semester"/>
+    <owl:Class rdf:about="#Milestone"/>
+    <owl:Class rdf:about="#External_Evaluator"/>
+    <owl:Class rdf:about="#Proposal"/>
+
+    <!-- Object Properties -->
+    <owl:ObjectProperty rdf:about="#hasSupervisor">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Supervisor"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#hasFYP_Coordinator">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#FYP_Coordinator"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#submits">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Progress_Report"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#hasMilestone">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="#Milestone"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#worksOn">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Project"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#evaluatedBy">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="#External_Evaluator"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#reviewedBy">
+        <rdfs:domain rdf:resource="#Proposal"/>
+        <rdfs:range rdf:resource="#Supervisor"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="#hasMember">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Student"/>
+    </owl:ObjectProperty>
+
+    <!-- Data Properties -->
+    <owl:DatatypeProperty rdf:about="#hasName">
+        <rdfs:domain rdf:resource="#Student"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#hasID">
+        <rdfs:domain rdf:resource="#Student"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#projectTitle">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#projectDescription">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#submissionDate">
+        <rdfs:domain rdf:resource="#Progress_Report"/>
+        <rdfs:range rdf:resource="xsd:date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#semesterName">
+        <rdfs:domain rdf:resource="#Semester"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#semesterStartDate">
+        <rdfs:domain rdf:resource="#Semester"/>
+        <rdfs:range rdf:resource="xsd:date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#semesterEndDate">
+        <rdfs:domain rdf:resource="#Semester"/>
+        <rdfs:range rdf:resource="xsd:date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#milestoneTitle">
+        <rdfs:domain rdf:resource="#Milestone"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#milestoneDeadline">
+        <rdfs:domain rdf:resource="#Milestone"/>
+        <rdfs:range rdf:resource="xsd:date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#proposalTitle">
+        <rdfs:domain rdf:resource="#Proposal"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#proposalDescription">
+        <rdfs:domain rdf:resource="#Proposal"/>
+        <rdfs:range rdf:resource="xsd:string"/>
+    </owl:DatatypeProperty>
+
+    <!-- Property Restrictions -->
+    <owl:Class rdf:about="#Project">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#worksOn"/>
+                <owl:qualifiedCardinality rdf:datatype="xsd:nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="#Group"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Milestone">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#hasMilestone"/>
+                <owl:someValuesFrom rdf:resource="#Project"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Progress_Report">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#submits"/>
+                <owl:someValuesFrom rdf:resource="#Group"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="#Proposal">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#reviewedBy"/>
+                <owl:someValuesFrom rdf:resource="#Supervisor"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+</rdf:RDF>

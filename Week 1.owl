@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.example.org/fyp-process"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.example.org/fyp-process">
+
+    <!-- Classes -->
+
+    <Class rdf:ID="Student"/>
+    <Class rdf:ID="Group"/>
+    <Class rdf:ID="Project"/>
+    <Class rdf:ID="Supervisor"/>
+    <Class rdf:ID="FYP_Coordinator"/>
+    <Class rdf:ID="Supervisory_Committee"/>
+    <Class rdf:ID="Progress_Report"/>
+    <Class rdf:ID="Evaluation"/>
+    <Class rdf:ID="Semester"/>
+    <Class rdf:ID="Milestone"/>
+    <Class rdf:ID="External_Evaluator"/>
+    <Class rdf:ID="Proposal"/>
+
+    <!-- Object Properties -->
+
+    <ObjectProperty rdf:ID="hasMember">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Student"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="worksOn">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Project"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="supervises">
+        <rdfs:domain rdf:resource="#Supervisor"/>
+        <rdfs:range rdf:resource="#Group"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="coordinates">
+        <rdfs:domain rdf:resource="#FYP_Coordinator"/>
+        <rdfs:range rdf:resource="#Project"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="monitors">
+        <rdfs:domain rdf:resource="#FYP_Coordinator"/>
+        <rdfs:range rdf:resource="#Progress_Report"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="oversees">
+        <rdfs:domain rdf:resource="#Supervisory_Committee"/>
+        <rdfs:range rdf:resource="#Project"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="submits">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Progress_Report"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="evaluates">
+        <rdfs:domain rdf:resource="#Supervisor"/>
+        <rdfs:range rdf:resource="#Project"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="externalEvaluates">
+        <rdfs:domain rdf:resource="#External_Evaluator"/>
+        <rdfs:range rdf:resource="#Project"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="hasMilestone">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="#Milestone"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="belongsToSemester">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="#Semester"/>
+    </ObjectProperty>
+
+    <!-- Additional Object Properties -->
+
+    <ObjectProperty rdf:ID="assignedSupervisor">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Supervisor"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="assignedByCoordinator">
+        <rdfs:domain rdf:resource="#Supervisor"/>
+        <rdfs:range rdf:resource="#FYP_Coordinator"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="hasProgressReport">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="#Progress_Report"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="reportsTo">
+        <rdfs:domain rdf:resource="#Student"/>
+        <rdfs:range rdf:resource="#Supervisor"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="managedBy">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="#FYP_Coordinator"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="evaluatedByCommittee">
+        <rdfs:domain rdf:resource="#Project"/>
+        <rdfs:range rdf:resource="#Supervisory_Committee"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="submittedProposalTo">
+        <rdfs:domain rdf:resource="#Group"/>
+        <rdfs:range rdf:resource="#Supervisory_Committee"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="belongsToGroup">
+        <rdfs:domain rdf:resource="#Student"/>
+        <rdfs:range rdf:resource="#Group"/>
+    </ObjectProperty>
+
+    <ObjectProperty rdf:ID="reviewedBy">
+        <rdfs:domain rdf:resource="#Proposal"/>
+        <rdfs:range rdf:resource="#Supervisor"/>
+    </ObjectProperty>
+
+</Ontology>
